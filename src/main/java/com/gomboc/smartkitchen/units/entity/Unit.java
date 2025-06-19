@@ -16,6 +16,5 @@ public class Unit {
     private Long id;
     private String name;
     private String symbol;
-    private Double quantity;
     private Double gramsEquivalent;
 }

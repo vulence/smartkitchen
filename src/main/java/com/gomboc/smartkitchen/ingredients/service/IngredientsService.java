@@ -16,4 +16,9 @@ public class IngredientsService {
     public List<Ingredient> findAll() {
         return repository.findAll();
     }
+
+    public Ingredient findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("The ingredient with id %s cannot be found!".formatted(id)));
+    }
 }
