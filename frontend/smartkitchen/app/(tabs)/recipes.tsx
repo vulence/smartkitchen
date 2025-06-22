@@ -1,13 +1,18 @@
-import { Link } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import ImageCard from '@/components/ImageCard';
+import { StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
 export default function Recipes() {
+  const theme = useTheme();
+  
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home screen</Text>
-      <Link href="/about" style={styles.button}>
-        Go to About screen
-      </Link>
+      <ImageCard
+        title="Toast with eggs and avocado"
+        imageUrl="https://cleananddelicious.com/wp-content/uploads/2025/01/avocado-toast.jpg"
+        timeToMake={15}
+        totalKcal={100}
+      />
     </View>
   );
 }
@@ -16,15 +21,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#25292e',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: '#fff',
-  },
-  button: {
-    fontSize: 20,
-    textDecorationLine: 'underline',
-    color: '#fff',
   },
 });
