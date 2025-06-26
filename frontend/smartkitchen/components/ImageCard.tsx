@@ -1,6 +1,5 @@
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { ImageBackground, StyleSheet } from "react-native";
-import { Card, Text } from "react-native-paper";
+import { ImageBackground, StyleSheet, View } from "react-native";
+import { Card, Icon, IconButton, Text } from "react-native-paper";
 
 interface Props {
     imageUrl: string;
@@ -11,50 +10,95 @@ interface Props {
 
 export default function ImageCard(props: Props) {
     return (
-        <Card style={styles.container} onPress={() => {}}>
+        <Card style={styles.container} onPress={() => { }}>
             <ImageBackground
                 source={{ uri: props.imageUrl }}
                 imageStyle={styles.image}
+                style={styles.imageContainer}
             >
-                <Card.Title
-                    style={styles.titleContainer}
-                    titleStyle={[styles.title, { fontSize: props.title.length > 27 ? 16 : 25}]}
-                    title={props.title}
-                    titleVariant="headlineMedium"
-                />
+                <View style={styles.overlay}>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>{props.title}</Text>
+                    </View>
 
-                <Card.Content style={styles.timeToMakeContainer}>
-                    <AntDesign style={styles.clockIcon} name="clockcircleo" size={22} color="white" />
-                    <Text>{props.timeToMake} mins</Text>
-                </Card.Content>
+                    <View style={styles.kcalContainer}>
+                        <Icon 
+                            source="fire"
+                            size={22} 
+                            color='#ffce00' 
+                        />
+                        <Text>{props.totalKcal} kcal</Text>
+                    </View>
+
+                    <View style={styles.favoritesContainer}>
+                        <IconButton 
+                            style={styles.favoriteIcon} 
+                            icon="heart-outline" 
+                            size={30}
+                            iconColor='pink'
+                            onPress={() => {}}
+                        />
+                    </View>
+
+                    <View style={styles.timeToMakeContainer}>
+                        <Icon 
+                            source="clock-outline" 
+                            size={22} 
+                        />
+                        <Text>{props.timeToMake} mins</Text>
+                    </View>
+                </View>
             </ImageBackground>
         </Card>
     );
 }
 
 const styles = StyleSheet.create({
+    imageContainer: {
+        height: 180,
+    },
     image: {
         borderRadius: 12,
-        height: 180,
         opacity: 0.55
     },
     container: {
         margin: 15,
         height: 180
     },
+    overlay: {
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+    },
     titleContainer: {
-        bottom: -100
+        position: 'absolute',
+        bottom: 35,
+        marginLeft: 10,
     },
     title: {
         fontWeight: "bold",
         fontSize: 25,
     },
     timeToMakeContainer: {
-        bottom: -95,
+        position: 'absolute',
+        left: 10,
+        bottom: 7,
         flexDirection: "row",
-        gap: 8
+        gap: 4,
     },
-    clockIcon: {
-        opacity: 0.7
+    kcalContainer: {
+        position: 'absolute',
+        right: 0,
+        top: 0,
+        margin: 8,
+        flexDirection: "row",
+    },
+    favoritesContainer: {
+        position: 'absolute',
+        left: 0,
+        top: 0
+    },
+    favoriteIcon: {
+        margin: 0
     }
-});
+})
