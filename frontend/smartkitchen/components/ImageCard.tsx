@@ -18,7 +18,7 @@ export default function ImageCard(props: Props) {
             >
                 <View style={styles.overlay}>
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{props.title}</Text>
+                        <Text style={[styles.title, { fontSize: props.title.length > 27 ? 17 : 25}]}>{props.title}</Text>
                     </View>
 
                     <View style={styles.kcalContainer}>
