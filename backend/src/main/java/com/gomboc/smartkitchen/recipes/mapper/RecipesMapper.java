@@ -5,6 +5,7 @@ import com.gomboc.smartkitchen.ingredients.service.IngredientsService;
 import com.gomboc.smartkitchen.recipeingredient.RecipeIngredient;
 import com.gomboc.smartkitchen.recipeingredient.dto.RecipeIngredientRequest;
 import com.gomboc.smartkitchen.recipes.dto.CreateRecipeRequest;
+import com.gomboc.smartkitchen.recipes.dto.ShortRecipe;
 import com.gomboc.smartkitchen.recipes.entity.Recipe;
 import com.gomboc.smartkitchen.units.entity.Unit;
 import com.gomboc.smartkitchen.units.service.UnitsService;
@@ -19,6 +20,10 @@ public class RecipesMapper {
 
     private final IngredientsService ingredientsService;
     private final UnitsService unitsService;
+
+    public ShortRecipe toShortRecipe(Recipe recipe) {
+        return new ShortRecipe(recipe.getId(), recipe.getName(), recipe.getMinutesToMake(), 0, "");
+    }
 
     public Recipe toEntity(CreateRecipeRequest recipeRequest) {
         Recipe recipe = new Recipe();

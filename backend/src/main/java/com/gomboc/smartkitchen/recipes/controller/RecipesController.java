@@ -1,6 +1,7 @@
 package com.gomboc.smartkitchen.recipes.controller;
 
 import com.gomboc.smartkitchen.recipes.dto.CreateRecipeRequest;
+import com.gomboc.smartkitchen.recipes.dto.ShortRecipe;
 import com.gomboc.smartkitchen.recipes.mapper.RecipesMapper;
 import com.gomboc.smartkitchen.recipes.entity.Recipe;
 import com.gomboc.smartkitchen.recipes.service.RecipesService;
@@ -15,14 +16,20 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/recipes")
+@CrossOrigin
 public class RecipesController {
 
     private final RecipesService recipesService;
     private final RecipesMapper recipesMapper;
 
     @GetMapping
-    public ResponseEntity<List<Recipe>> findAll() {
-        return ResponseEntity.ok(recipesService.findAll());
+    public ResponseEntity<List<ShortRecipe>> findAll() {
+        return ResponseEntity.ok(
+                recipesService.findAll()
+                        .stream()
+                        .map(recipesMapper::toShortRecipe)
+                        .toList()
+        );
     }
 
     @PostMapping
